@@ -1,4 +1,14 @@
-package palindrome.test;
+package palindrome.tests;
+
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -18,6 +28,11 @@ public class BeforeAndAfter {
 	 static test.utility.CommonLib common;
 	 static String headless = null;
 	 static	ConfigReader reader = new ConfigReader();
+	 static final String HEADLESSPROP = "headless";
+	 
+	 protected BeforeAndAfter() {
+	      //not called
+	   }
 	 	 
 	@BeforeClass
 	public static void setUp(){
@@ -32,7 +47,7 @@ public class BeforeAndAfter {
 				
 		System.setProperty(strBrowserType, strDriverPath);
 			
-		System.setProperty("headless", strIsHeadLess);
+		System.setProperty(HEADLESSPROP, strIsHeadLess);
 					        
         if (strBrowserType.contains("chrome")) {
         	startChromeDriver();
@@ -40,9 +55,7 @@ public class BeforeAndAfter {
         else {
         	startFireFoxDriver();
         }
-        
-        	
-                	
+         	               	
 		driver.navigate().to(strURL);
 		
 		loginPage = new pages.LoginPage(driver);
@@ -65,7 +78,7 @@ public class BeforeAndAfter {
 		
 		ChromeOptions chromeOptions = new ChromeOptions();
 		
-		headless = System.getProperty("headless");
+		headless = System.getProperty(HEADLESSPROP);
 		
 		if(headless.equals("true")) {
             chromeOptions.addArguments("--headless");
@@ -80,7 +93,7 @@ public class BeforeAndAfter {
 		
 		FirefoxOptions ffOptions = new FirefoxOptions();
 		   
-		headless = System.getProperty("headless");
+		headless = System.getProperty(HEADLESSPROP);
 		
 		if(headless.equals("true")) {
             ffOptions.addArguments("--headless");
@@ -89,5 +102,27 @@ public class BeforeAndAfter {
         } 
 		
         driver = new FirefoxDriver(ffOptions);
+	}
+	
+	public static void printPalindromeCount(List<String> palindromesList) {
+				
+		 List<String> lines = Arrays.asList("The count of the visible Palindromes", 
+				 String.valueOf(palindromesList.size()));
+		 
+		 Path file = Paths.get("countPalindromeNum.txt");
+		 
+		 try {
+			 
+			Files.write(file, lines, Charset.forName("UTF-8"));
+			
+		} catch (IOException e) {
+			
+			String message = "Unable to write to countPalindromeNum.txt!";
+			
+			Logger logger = Logger.getLogger(BeforeAndAfter.class.getName());
+			
+			logger.log(Level.SEVERE, message, e);
+   		
+		}
 	}
 }

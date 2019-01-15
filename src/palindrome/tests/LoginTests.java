@@ -1,4 +1,4 @@
-package palindrome.test;
+package palindrome.tests;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
