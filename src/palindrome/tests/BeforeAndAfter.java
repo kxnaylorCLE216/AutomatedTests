@@ -29,15 +29,14 @@ public class BeforeAndAfter {
 	 static String headless = null;
 	 static	ConfigReader reader = new ConfigReader();
 	 static final String HEADLESSPROP = "headless";
+	 static String strURL = reader.getURL();
 	 
 	 protected BeforeAndAfter() {
 	      //not called
 	   }
 	 	 
 	@BeforeClass
-	public static void setUp(){
-						
-		String strURL = reader.getURL();
+	public static void setUp(){		
 		
 		String strBrowserType = reader.getBrowserType();
 		
@@ -56,8 +55,6 @@ public class BeforeAndAfter {
         	startFireFoxDriver();
         }
          	               	
-		driver.navigate().to(strURL);
-		
 		loginPage = new pages.LoginPage(driver);
 		
 		palindromeTestPage = new pages.PalindromeTestPage(driver);

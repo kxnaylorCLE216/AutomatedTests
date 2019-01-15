@@ -7,6 +7,8 @@ public class LoginTests extends BeforeAndAfter {
 		
 	@Test
 	public void redirectedValidCred() {
+		
+		driver.navigate().to(strURL);
 				
 		loginPage.loginIntoPage();
 		
@@ -17,6 +19,8 @@ public class LoginTests extends BeforeAndAfter {
 	
 	@Test
 	public void userNameRequired() {
+		
+		driver.navigate().to(strURL);
 				
 		boolean boolRequired =loginPage.loginNoUserName();
 				
@@ -25,6 +29,8 @@ public class LoginTests extends BeforeAndAfter {
 	
 	@Test
 	public void passwordRequired() {
+		
+		driver.navigate().to(strURL);
 				
 		boolean boolRequired =loginPage.loginNoPassword();
 		
@@ -33,6 +39,8 @@ public class LoginTests extends BeforeAndAfter {
 	
 	@Test
 	public void invalidUsernameCred() {
+		
+		driver.navigate().to(strURL);
 		
 		loginPage.loginIntoPage("tester", "password");
 		
@@ -43,6 +51,8 @@ public class LoginTests extends BeforeAndAfter {
 	
 	@Test
 	public void invalidPasswordCred() {
+		
+		driver.navigate().to(strURL);
 		
 		loginPage.loginIntoPage("test", "1234");
 				

@@ -13,6 +13,9 @@ public class PalindromeTests extends BeforeAndAfter {
 		
 	@Before
 	public void redirectedValidCred() {
+		
+		driver.navigate().to(strURL);
+		
 		loginPage.loginIntoPage();
 	}
 		
